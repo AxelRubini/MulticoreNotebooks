@@ -6,7 +6,7 @@ Google Colab notebooks for running CUDA exercises from the Multicore course.
 
 - **MulticoreTemplate.ipynb** - Italian version
 - **MulticoreTemplate_EN.ipynb** - English version
-- **guides/** - User guides (IT/EN)
+- **guides** - User guides (IT/EN)
 
 ## Quick Start
 
@@ -37,5 +37,5 @@ Each notebook guides you through:
 4. Viewing results
 5. Saving and syncing to GitHub
 
-For detailed instructions, see the guides in the `guides/` folder.
+For detailed instructions, see the guide file.
 
