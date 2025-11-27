@@ -1,0 +1,165 @@
+\documentclass[11pt,a4paper]{article}
+
+% Pacchetti
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{fontawesome5}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\setlength{\headheight}{14pt}
+
+% Configurazione hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Guida Colab},
+    pdfpagemode=FullScreen,
+}
+
+% Configurazione listings per Python
+\lstdefinestyle{python}{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{red},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    backgroundcolor=\color{gray!10},
+    tabsize=4
+}
+
+\lstset{style=python}
+
+% Box personalizzati
+\newtcolorbox{warningbox}{
+    colback=orange!5!white,
+    colframe=orange!75!black,
+    title=\faExclamationTriangle\ Attenzione
+}
+
+\newtcolorbox{tipbox}{
+    colback=blue!5!white,
+    colframe=blue!75!black,
+    title=\faLightbulb\ Suggerimento
+}
+
+\newtcolorbox{notebox}{
+    colback=green!5!white,
+    colframe=green!75!black,
+    title=\faInfoCircle\ Nota
+}
+
+% Header e footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textit{Guida Colab}}
+\rfoot{Pagina \thepage}
+
+% Titolo
+\title{\textbf{Guida per MulticoreTemplate notebook}\\\large}
+\author{[Axel Rubini]}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Descrizione}
+Questa guida fornisce istruzioni dettagliate per l' uso del notebook \texttt{MulticoreTemplate} in Google Colab.
+I notebook sono gia' presenti nella repository dove e' presente questa guida.
+\section{Prerequisiti}
+\begin{itemize}
+	\item Account Google (per accedere a Google Colab)
+	\item GitHub (opzionale)
+	\item Accesso a Google Drive
+\end{itemize}
+
+\section{Setup Iniziale}
+
+\subsection{Apertura del Notebook}
+\begin{enumerate}
+	\item Vai su \url{https://colab.research.google.com/}
+	\item Caricare il notebook dal computer:
+	      \begin{itemize}
+		      \item Clicca su \texttt{File > Carica notebook}
+		      \item Seleziona la scheda \texttt{Carica} e scegli il file \texttt{MulticoreTemplate.ipynb} dal tuo computer
+	      \end{itemize}
+
+\end{enumerate}
+
+\subsection{Configurazione Runtime}
+\begin{enumerate}
+	\item Vai su \texttt{Runtime > Cambia tipo di runtime}
+	\item Seleziona le seguenti impostazioni:
+	      \begin{itemize}
+		      \item \textbf{Tipo di runtime}: Python 3
+		      \item \textbf{Acceleratore hardware}: [GPU - T4]
+	      \end{itemize}
+\end{enumerate}
+
+\subsection{Connessione al Runtime}
+\begin{itemize}
+	\item Clicca su \texttt{Connetti} in alto a destra
+	      \includegraphics[width=0.3\textwidth]{../resources/ConnectionRunTime.png}
+	\item Attendi che il runtime sia pronto (icona verde con checkmark)
+\end{itemize}
+
+\section{Struttura del Notebook}
+
+\subsection{Sezione 1: [Configurazione Iniziale e Esercizi Futuri]}
+\textbf{Scopo}: [In questa sezione del notebook sono presenti gli script che creano i repository per gli esercizi, ovvero verra' creata una main directory che conterra' le sottodirecotries per l' esercizio attuale e per i futuri esercizi.]
+
+\textbf{Celle da eseguire}:
+\begin{itemize}
+	\item \texttt{[1]} - [La prima cella server per creare la main directory se non e' gia' presente. ed a creare le repository git per l' esercizio attuale]
+	\item \texttt{[2]} - [In questa cella e' presente uno script che permette di visualizzare le caratteristiche della GPU.]
+	\item \texttt{[3 (opzionale)]} - {[Questa cella configura git e crea una repository sul tuo account GitHub. L' accesso a GitHub deve essere eseguito tramite token personale, da inserire ogni volta che viene fatta eseguire la cella per la prima volta nel runtime e rimane valido fino a che il runtime non viene riavviato.]}
+\end{itemize}
+
+\begin{notebox}
+	Se volete usare GitHub consiglio di creare un token e di salvarvelo dentro l' apposito gestore di chiavi di colab \\
+	\includegraphics[width=0.3\textwidth]{../resources/CoLabKey.png}
+\end{notebox}
+
+\subsection{Sezione 2: [Caricare il propio codice]}
+\textbf{Scopo}: [Caricare il proprio file.cu all' interno della directory dell' esercizio attuale.]
+
+\textbf{Celle da eseguire}:
+\begin{itemize}
+	\item \texttt{[4]} - [In questa cella e' presente uno script che permette di caricare il proprio file.cu all' interno della direcotory dell' esercizio attuale, oppure utilizzare gia' i file esistenti all' interno del progetto.]
+\end{itemize}
+
+\begin{notebox}
+	Se si vuole caricare un file che ha lo stesso nome di uno attuale e' consigliato eliminare il vecchio file a mano attraverso il terminale di lavoro o con il side tree presente su CoLab.
+\end{notebox}
+\subsection{Sezione 3: [Eseguire il codice e visualiccare i risultati]}
+\textbf{Scopo}: [Le celle successive servono per compilare,pulire, eseguire e visualizzare i risultati del proprio codice all' interno del notebook.]
+
+\textbf{Celle da eseguire}:
+\begin{itemize}
+	\item \texttt{[5]} - [Compila il codice sorgente .cu i parametri pre configurati sono quelli per il run su GPU T4, se si vuole cambiare tipo di GPU o altri parametri e' possibile modificare la cella.]
+	\item \texttt{[6]} - [Esegue il clean della directory di lavoro, eliminando i file di output generati dalle esecuzioni precedenti.]
+	\item \texttt{[7]} - [Esegue il codice compilato.]
+\end{itemize}
+
+\subsection{Sezione 4: [Salvataggio dei risultati e caricamento su GitHub]}
+\textbf{Scopo}: [Le celle successive servono per generare un po' di documentazione e sincronizzare la repository su GitHub la descrizione e' omessa per brevita'.]
+
+
+
+\end{document}
