@@ -1,0 +1,167 @@
+\documentclass[11pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{fontawesome5}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\setlength{\headheight}{14pt}
+
+% Hyperref configuration
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Colab Guide},
+    pdfpagemode=FullScreen,
+}
+
+% Listings configuration for Python
+\lstdefinestyle{python}{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{red},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    backgroundcolor=\color{gray!10},
+    tabsize=4
+}
+
+\lstset{style=python}
+
+% Custom boxes
+\newtcolorbox{warningbox}{
+    colback=orange!5!white,
+    colframe=orange!75!black,
+    title=\faExclamationTriangle\ Warning
+}
+
+\newtcolorbox{tipbox}{
+    colback=blue!5!white,
+    colframe=blue!75!black,
+    title=\faLightbulb\ Tip
+}
+
+\newtcolorbox{notebox}{
+    colback=green!5!white,
+    colframe=green!75!black,
+    title=\faInfoCircle\ Note
+}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textit{Colab Guide}}
+\rfoot{Page \thepage}
+
+% Title
+\title{\textbf{Guide for MulticoreTemplate Notebook}\\\large}
+\author{[Axel Rubini]}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Description}
+This guide provides detailed instructions for using the \texttt{MulticoreTemplate} notebook in Google Colab.
+The notebooks are already present in the repository where this guide is located.
+
+\section{Prerequisites}
+\begin{itemize}
+	\item Google Account (to access Google Colab)
+	\item GitHub (optional)
+	\item Access to Google Drive
+\end{itemize}
+
+\section{Initial Setup}
+
+\subsection{Opening the Notebook}
+\begin{enumerate}
+	\item Go to \url{https://colab.research.google.com/}
+	\item Upload the notebook from your computer:
+	      \begin{itemize}
+		      \item Click on \texttt{File > Upload notebook}
+		      \item Select the \texttt{Upload} tab and choose the \texttt{MulticoreTemplate.ipynb} file from your computer
+	      \end{itemize}
+
+\end{enumerate}
+
+\subsection{Runtime Configuration}
+\begin{enumerate}
+	\item Go to \texttt{Runtime > Change runtime type}
+	\item Select the following settings:
+	      \begin{itemize}
+		      \item \textbf{Runtime type}: Python 3
+		      \item \textbf{Hardware accelerator}: [GPU - T4]
+	      \end{itemize}
+\end{enumerate}
+
+\subsection{Connecting to Runtime}
+\begin{itemize}
+	\item Click on \texttt{Connect} in the top right
+	      \includegraphics[width=0.3\textwidth]{../resources/ConnectionRunTime.png}
+	\item Wait until the runtime is ready (green icon with checkmark)
+\end{itemize}
+
+\section{Notebook Structure}
+
+\subsection{Section 1: [Initial Setup and Future Exercises]}
+\textbf{Purpose}: [This section of the notebook contains the scripts that create the repositories for the exercises. A main directory will be created that will contain the subdirectories for the current exercise and future exercises.]
+
+\textbf{Cells to execute}:
+\begin{itemize}
+	\item \texttt{[1]} - [The first cell is used to create the main directory if it doesn't already exist, and to create the git repository for the current exercise]
+	\item \texttt{[2]} - [This cell contains a script that allows you to view the GPU characteristics.]
+	\item \texttt{[3 (optional)]} - {[This cell configures git and creates a repository on your GitHub account. Access to GitHub must be done via a personal token, which needs to be entered each time the cell is executed for the first time in the runtime and remains valid until the runtime is restarted.]}
+\end{itemize}
+
+\begin{notebox}
+	If you want to use GitHub, I recommend creating a token and saving it in the appropriate key manager in Colab \\
+	\includegraphics[width=0.3\textwidth]{../resources/CoLabKey.png}
+\end{notebox}
+
+\subsection{Section 2: [Loading Your Own Code]}
+\textbf{Purpose}: [Load your own .cu file into the directory of the current exercise.]
+
+\textbf{Cells to execute}:
+\begin{itemize}
+	\item \texttt{[4]} - [This cell contains a script that allows you to upload your own .cu file into the current exercise directory, or use files already existing in the project.]
+\end{itemize}
+
+\begin{notebox}
+	If you want to upload a file that has the same name as an existing one, it is recommended to delete the old file manually through the work terminal or with the side tree present in CoLab.
+\end{notebox}
+
+\subsection{Section 3: [Executing Code and Viewing Results]}
+\textbf{Purpose}: [The following cells are used to compile, clean, execute and view the results of your own code within the notebook.]
+
+\textbf{Cells to execute}:
+\begin{itemize}
+	\item \texttt{[5]} - [Compiles the .cu source code. The pre-configured parameters are those for running on GPU T4. If you want to change GPU type or other parameters, you can modify the cell.]
+	\item \texttt{[6]} - [Performs cleaning of the working directory, removing output files generated by previous executions.]
+	\item \texttt{[7]} - [Executes the compiled code.]
+\end{itemize}
+
+\subsection{Section 4: [Saving Results and Uploading to GitHub]}
+\textbf{Purpose}: [The following cells are used to generate some documentation and synchronize the repository on GitHub. The description is omitted for brevity.]
+
+
+
+\end{document}
